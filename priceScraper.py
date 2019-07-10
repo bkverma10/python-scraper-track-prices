@@ -4,9 +4,8 @@ from bs4 import BeautifulSoup
 import config
 import time
 
-driver = webdriver.Chrome('/Users/bharatverma/Documents/GitHub/python-scraper-track-prices/chromedriver')
-driver.get('https://www.amazon.com/NIKE-Revolution-Running-Black-Cool-Regular/dp/B06XKLCKHK/ref=sr_1_3?keywords=nike%2Bshoes%2Bmen&qid=1562706205&s=gateway&sprefix=nike&sr=8-3&th=1&psc=1')
-
+driver = webdriver.Chrome(config.chromeDriver)
+driver.get(config.priceScraperURL)
 
 def check_price():
     soup = BeautifulSoup(driver.page_source,"lxml")
@@ -35,7 +34,6 @@ def send_mail():
     body = 'Success'
 
     msg = f"Subject: {subject}\n\n{body}"
-    #msg = "Message from scrapper"
     server.sendmail(
         config.mailFromAddress,
         config.mailToAddress,
